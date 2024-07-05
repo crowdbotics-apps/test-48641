@@ -1,8 +1,6 @@
-
 import React, { useContext } from "react";
 import { View, Text, TouchableHighlight } from "react-native";
 import { OptionsContext } from "@options";
-
 /**
  * Custom button component
  * @param  {Function} onPress Function to be called when button is pressed
@@ -13,9 +11,12 @@ import { OptionsContext } from "@options";
  * @param  {String} children Title of the button
  * @return {Promise}
  */
-const Button = (props) => {
+
+const Button = props => {
   const options = useContext(OptionsContext);
-  const { styles } = options;
+  const {
+    styles
+  } = options;
   const {
     onPress,
     disabled,
@@ -24,17 +25,16 @@ const Button = (props) => {
     color,
     children
   } = props;
-
-  return (
-    <TouchableHighlight onPress={onPress} disabled={disabled} underlayColor='#DDDDDD'>
+  return <TouchableHighlight onPress={onPress} disabled={disabled} underlayColor='#DDDDDD'>
       <View style={[styles.button, {
-        backgroundColor: backgroundColor || "#000000",
-        height: height || 49
-      }]}>
-        <Text style={[styles.buttonText, { color: color || "#ffffff" }]}>{children}</Text>
+      backgroundColor: backgroundColor || "#000000",
+      height: height || 49
+    }]}>
+        <Text style={[styles.buttonText, {
+        color: color || "#ffffff"
+      }]}>{children}</Text>
       </View>
-    </TouchableHighlight>
-  );
+    </TouchableHighlight>;
 };
 
 export default Button;

@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import React, { useEffect, useState, useContext } from "react";
 import { Text, View, TextInput, Image, ScrollView, Alert } from "react-native";
 import { OptionsContext } from "@options";
@@ -6,48 +7,39 @@ import { getFollowing, unFollowUser } from "../store";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { getAlphabets } from "../utils";
-
 /**
  * Component to display a list of following users.
  */
+
 const FollowingList = () => {
   const dispatch = useDispatch();
   const [followingUsers, setFollowing] = useState([]);
   const [allFollowing, setAllFollowing] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const { styles } = useContext(OptionsContext);
+  const {
+    styles
+  } = useContext(OptionsContext); // Fetch following users when the component mounts
 
-  // Fetch following users when the component mounts
   useEffect(() => {
-    dispatch(getFollowing())
-      .then(unwrapResult)
-      .then((response) => {
-        setFollowing(response?.results);
-        setAllFollowing(response?.results);
-      })
-      .catch((error) => __DEV__ && console.log(error));
-  }, []);
+    dispatch(getFollowing()).then(unwrapResult).then(response => {
+      setFollowing(response?.results);
+      setAllFollowing(response?.results);
+    }).catch(error => __DEV__ && console.log(error));
+  }, []); // Filter users based on searchQuery
 
-  // Filter users based on searchQuery
   useEffect(() => {
     if (searchQuery.length > 0) {
-      setFollowing(
-        allFollowing.filter((follower) =>
-          follower.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      );
+      setFollowing(allFollowing.filter(follower => follower.name.toLowerCase().includes(searchQuery.toLowerCase())));
     } else {
       setFollowing(allFollowing);
     }
   }, [searchQuery]);
-
-  return (
-    <ScrollView>
+  return <ScrollView>
       <View style={styles.followingContainer}>
         <View style={styles.followingSearchBar}>
           <Text style={styles.followingSearchText}>Search</Text>
           <View style={styles.followingSearchView}>
-            <View style={{ width: "90%" }}>
+            <View style={_styles.jKuhGaLh}>
               <Input placeholder="Enter" setValue={setSearchQuery} />
             </View>
             <Image source={require("../assets/search.png")} />
@@ -58,43 +50,21 @@ const FollowingList = () => {
             {followingUsers.length} Following
           </Text>
         </View>
-        {getAlphabets()?.map((alpha) => (
-          <>
-            {followingUsers.filter(
-              (following) => following.name.charAt(0).toUpperCase() === alpha
-            ).length > 0 && (
-              <View style={styles.frequentAlphabets}>
+        {getAlphabets()?.map(alpha => <>
+            {followingUsers.filter(following => following.name.charAt(0).toUpperCase() === alpha).length > 0 && <View style={styles.frequentAlphabets}>
                 <Text style={styles.frequentLetters}>{alpha}</Text>
-              </View>
-            )}
+              </View>}
             <View>
-              {followingUsers
-                .filter(
-                  (following) =>
-                    following.name.charAt(0).toUpperCase() === alpha
-                )
-                .map((following, index) => {
-                  return (
-                    <Follower
-                      id={following.id}
-                      name={following.name}
-                      bgcolor={following.bgcolor}
-                      following={followingUsers}
-                      setFollowing={setFollowing}
-                      key={index}
-                    />
-                  );
-                })}
+              {followingUsers.filter(following => following.name.charAt(0).toUpperCase() === alpha).map((following, index) => {
+            return <Follower id={following.id} name={following.name} bgcolor={following.bgcolor} following={followingUsers} setFollowing={setFollowing} key={index} />;
+          })}
             </View>
-          </>
-        ))}
+          </>)}
       </View>
-    </ScrollView>
-  );
+    </ScrollView>;
 };
 
 export default FollowingList;
-
 /**
  * Follower component displays user information and allows unfollowing.
  * @param {Object} props - The component's properties.
@@ -103,43 +73,40 @@ export default FollowingList;
  * @param {Array} props.following - An array of users being followed.
  * @param {Function} props.setFollowing - Function to update the list of followed users.
  */
-const Follower = (props) => {
-  const { styles } = useContext(OptionsContext);
-  const { id, name, following, setFollowing } = props;
+
+const Follower = props => {
+  const {
+    styles
+  } = useContext(OptionsContext);
+  const {
+    id,
+    name,
+    following,
+    setFollowing
+  } = props;
   const dispatch = useDispatch();
+
   const onUnFollow = () => {
-    dispatch(unFollowUser(id))
-      .then(unwrapResult)
-      .then(() => {
-        Alert.alert("Success", "User unfollowed");
-        setFollowing(following.filter((user) => user.id !== id));
-      })
-      .catch((error) => __DEV__ && console.log(error));
+    dispatch(unFollowUser(id)).then(unwrapResult).then(() => {
+      Alert.alert("Success", "User unfollowed");
+      setFollowing(following.filter(user => user.id !== id));
+    }).catch(error => __DEV__ && console.log(error));
   };
-  return (
-    <View style={styles.followingUser}>
+
+  return <View style={styles.followingUser}>
       <View style={styles.followingUserMain}>
-        <View
-          style={[
-            styles.followingUserImage,
-            { backgroundColor: props.bgcolor }
-          ]}
-        >
+        <View style={[styles.followingUserImage, _styles.mDlRGlsm]}>
           <Image source={require("../assets/edit.png")} />
         </View>
         <Text>{name}</Text>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          onUnFollow();
-        }}
-      >
+      <TouchableOpacity onPress={() => {
+      onUnFollow();
+    }}>
         <Text>Unfollow</Text>
       </TouchableOpacity>
-    </View>
-  );
+    </View>;
 };
-
 /**
  * A reusable input component.
  *
@@ -148,23 +115,23 @@ const Follower = (props) => {
  * @param {string} props.value - The value of the input.
  * @param {function} props.setValue - A function to set the input value.
  */
-const Input = (props) => {
-  const { styles } = useContext(OptionsContext);
-  return (
-    <View>
-      <TextInput
-        style={styles.followingSearchInput}
-        placeholder={props.placeholder}
-        value={props.value}
-        onChangeText={(num) => props.setValue(num)}
-        placeholderTextColor="#ddd"
-        editable={props.editable !== false}
-      />
-      {props.errorText
-        ? (
-        <Text style={styles.followingError}>{props.errorText}</Text>
-          )
-        : null}
-    </View>
-  );
+
+
+const Input = props => {
+  const {
+    styles
+  } = useContext(OptionsContext);
+  return <View>
+      <TextInput style={styles.followingSearchInput} placeholder={props.placeholder} value={props.value} onChangeText={num => props.setValue(num)} placeholderTextColor="#ddd" editable={props.editable !== false} />
+      {props.errorText ? <Text style={styles.followingError}>{props.errorText}</Text> : null}
+    </View>;
 };
+
+const _styles = StyleSheet.create({
+  jKuhGaLh: {
+    width: "90%"
+  },
+  mDlRGlsm: {
+    backgroundColor: "props.bgcolor"
+  }
+});

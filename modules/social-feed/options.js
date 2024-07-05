@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-
 const styles = StyleSheet.create({
   hr: {
     marginTop: 20,
@@ -12,17 +11,34 @@ const styles = StyleSheet.create({
     height: 100,
     padding: 13
   },
-  selectedSheet: { flex: 1, borderRadius: 11 },
+  selectedSheet: {
+    flex: 1,
+    borderRadius: 11
+  },
   // commentComponent
-  commentTextInput: { flexDirection: "row", marginHorizontal: -25 },
-  replyLikeButton: { flexDirection: "row", borderWidth: 0, padding: 5 },
+  commentTextInput: {
+    flexDirection: "row",
+    marginHorizontal: -25
+  },
+  replyLikeButton: {
+    flexDirection: "row",
+    borderWidth: 0,
+    padding: 5
+  },
   commentReplyMain: {
     flexDirection: "row",
     alignItems: "stretch",
     justifyContent: "space-between"
   },
-  commentReplyButton: { borderWidth: 0, padding: 5 },
-  commentLikeButton: { flexDirection: "row", borderWidth: 0, padding: 5 },
+  commentReplyButton: {
+    borderWidth: 0,
+    padding: 5
+  },
+  commentLikeButton: {
+    flexDirection: "row",
+    borderWidth: 0,
+    padding: 5
+  },
   singleCommentHeader: {
     flexDirection: "row",
     alignItems: "stretch",
@@ -216,7 +232,6 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "white"
   },
-
   followingSection: {
     display: "flex",
     flexDirection: "row",
@@ -339,7 +354,11 @@ const styles = StyleSheet.create({
   mr10: {
     marginRight: 10
   },
-  feedContainer: { padding: 10, height: "100%", backgroundColor: "#FFF" },
+  feedContainer: {
+    padding: 10,
+    height: "100%",
+    backgroundColor: "#FFF"
+  },
   createPostHeader: {
     display: "flex",
     flexDirection: "row",
@@ -348,7 +367,10 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 70
   },
-  headerImage: { height: 20, width: 20 },
+  headerImage: {
+    height: 20,
+    width: 20
+  },
   feedSearchBar: {
     display: "flex",
     flexDirection: "row",
@@ -560,7 +582,11 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderRadius: 10
   },
-  placeholderImage: { alignSelf: "center", width: 50, height: 42 },
+  placeholderImage: {
+    alignSelf: "center",
+    width: 50,
+    height: 42
+  },
   headerContainer: {
     display: "flex",
     flexDirection: "column",
@@ -579,13 +605,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 3,
     marginVertical: 5
   }
-});
+}); // API Authentication token
 
-// API Authentication token
-const USER_TOKEN = "";
-// APP's backend url
+const USER_TOKEN = ""; // APP's backend url
+
 const BASE_URL = "";
-
 export default {
   title: "App Menu",
   copy: "Routes available",

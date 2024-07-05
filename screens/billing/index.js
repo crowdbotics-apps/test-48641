@@ -2,8 +2,7 @@ import React from "react";
 import { Text, Image, StyleSheet, View, TouchableHighlight, ScrollView, TextInput } from "react-native";
 
 const BillingScreen = () => {
-  return (
-    <ScrollView>
+  return <ScrollView>
       <View style={styles.container}>
         <View style={styles.headerCard}>
           <View style={styles.cardContent}>
@@ -25,8 +24,8 @@ const BillingScreen = () => {
             Address
           </Text>
           <View style={styles.inputIcon}>
-            <Input value="Maple Ave, Los Angeles" style={styles.inputStyle} placeholder='Enter'/>
-            <Image style={styles.icon} source={require("./assets/check.png")}/>
+            <Input value="Maple Ave, Los Angeles" style={styles.inputStyle} placeholder='Enter' />
+            <Image style={styles.icon} source={require("./assets/check.png")} />
           </View>
         </View>
         <OrderCard />
@@ -38,8 +37,7 @@ const BillingScreen = () => {
           </Button>
         </View>
       </View>
-    </ScrollView>
-  );
+    </ScrollView>;
 };
 
 const styles = StyleSheet.create({
@@ -99,7 +97,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 0
   },
-
   icon: {
     height: 18,
     width: 18,
@@ -110,12 +107,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: "10%"
   }
 });
-
 export default BillingScreen;
 
 const OrderCard = () => {
-  return (
-    <View style={orderStyles.container}>
+  return <View style={orderStyles.container}>
       <View style={orderStyles.order}>
         <View style={orderStyles.image}>
           <Image source={require("./assets/edit.png")} />
@@ -129,8 +124,7 @@ const OrderCard = () => {
       <View>
         <Text style={orderStyles.orderPrice}>$10.25</Text>
       </View>
-    </View>
-  );
+    </View>;
 };
 
 const orderStyles = StyleSheet.create({
@@ -185,19 +179,19 @@ const orderStyles = StyleSheet.create({
   }
 });
 
-const Button = (props) => {
-  return (
-    <TouchableHighlight onPress={props.onPress} underlayColor='#DDDDDD'>
+const Button = props => {
+  return <TouchableHighlight onPress={props.onPress} underlayColor='#DDDDDD'>
       <View style={[btnStyles.button, {
-        backgroundColor: props.backgroundColor ? props.backgroundColor : "#000000",
-        height: props.height ? props.height : 49,
-        borderWidth: props.borderWidth ? props.borderWidth : 0,
-        borderColor: props.borderColor ? props.borderColor : "#000000"
-      }]}>
-        <Text style={[btnStyles.text, { color: props.color ? props.color : "#ffffff" }]}>{props.children}</Text>
+      backgroundColor: props.backgroundColor ? props.backgroundColor : "#000000",
+      height: props.height ? props.height : 49,
+      borderWidth: props.borderWidth ? props.borderWidth : 0,
+      borderColor: props.borderColor ? props.borderColor : "#000000"
+    }]}>
+        <Text style={[btnStyles.text, {
+        color: props.color ? props.color : "#ffffff"
+      }]}>{props.children}</Text>
       </View>
-    </TouchableHighlight>
-  );
+    </TouchableHighlight>;
 };
 
 const btnStyles = StyleSheet.create({
@@ -213,20 +207,13 @@ const btnStyles = StyleSheet.create({
   }
 });
 
-const Input = (props) => {
-  return (
-    <View>
-      <TextInput
-        style={inputStyles.input}
-        placeholder={props.placeholder}
-        value={props.value}
-        onChangeText={props.setValue}
-        placeholderTextColor='#ddd'
-      />
+const Input = props => {
+  return <View>
+      <TextInput style={inputStyles.input} placeholder={props.placeholder} value={props.value} onChangeText={props.setValue} placeholderTextColor='#ddd' />
       {props.errorText ? <Text style={inputStyles.error}>{props.errorText}</Text> : null}
-    </View>
-  );
+    </View>;
 };
+
 const inputStyles = StyleSheet.create({
   input: {
     backgroundColor: "#fff",

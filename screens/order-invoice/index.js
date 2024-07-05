@@ -8,8 +8,7 @@ const OrderInvoice = () => {
       name: "Product name",
       totalPrice: 10,
       image: require("./assets/productImage.png"),
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor aliquam augue placerat mattis amet velit nisi nisl dui imperdiet et in. .",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor aliquam augue placerat mattis amet velit nisi nisl dui imperdiet et in. .",
       promoPrice: 0,
       deliveryFee: 0,
       productPrice: 10,
@@ -17,8 +16,7 @@ const OrderInvoice = () => {
       barcode: require("./assets/barcodeImage.png")
     });
   }, []);
-  return (
-    <View style={styles.container}>
+  return <View style={styles.container}>
       <Text style={styles.heading}>Order Id</Text>
       <Text style={styles.subHeading}>#2345123</Text>
       <View style={styles.invoiceCard}>
@@ -65,9 +63,9 @@ const OrderInvoice = () => {
         </View>
         <Image source={order.barcode} style={styles.barcode} />
       </View>
-    </View>
-  );
+    </View>;
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -149,5 +147,4 @@ const styles = StyleSheet.create({
     marginTop: 40
   }
 });
-
 export default OrderInvoice;

@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  Pressable,
-  ImageBackground,
-  ScrollView
-} from "react-native";
+import { Text, View, StyleSheet, Image, Pressable, ImageBackground, ScrollView } from "react-native";
 
 const RewardsHistory = () => {
   const [reward, setReward] = useState({});
@@ -18,72 +10,52 @@ const RewardsHistory = () => {
       image: require("./assets/image.png"),
       points: 2.5,
       rating: 4.4,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa faucibus nisi egestas quis etiam nec feugiat. Scelerisque pellentesque at in accumsan cras tristique at id. At nullam lectus sapien nulla. At egestas cursus elit, tortor mattis gravida ornare proin ipsum. Duis purus turpis libero tristique dignissim."
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa faucibus nisi egestas quis etiam nec feugiat. Scelerisque pellentesque at in accumsan cras tristique at id. At nullam lectus sapien nulla. At egestas cursus elit, tortor mattis gravida ornare proin ipsum. Duis purus turpis libero tristique dignissim."
     });
-    setRewardsHistory([
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-        date: "June 18, 2022",
-        time: "4:00 AM",
-        points: 250
-      },
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-        date: "June 18, 2022",
-        time: "4:00 AM",
-        points: 100
-      },
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-        date: "June 18, 2022",
-        time: "4:00 AM",
-        points: 50
-      },
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-        date: "June 18, 2022",
-        time: "4:00 AM",
-        points: 100
-      },
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-        date: "June 18, 2022",
-        time: "4:00 AM",
-        points: 250
-      }
-    ]);
+    setRewardsHistory([{
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      date: "June 18, 2022",
+      time: "4:00 AM",
+      points: 250
+    }, {
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      date: "June 18, 2022",
+      time: "4:00 AM",
+      points: 100
+    }, {
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      date: "June 18, 2022",
+      time: "4:00 AM",
+      points: 50
+    }, {
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      date: "June 18, 2022",
+      time: "4:00 AM",
+      points: 100
+    }, {
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      date: "June 18, 2022",
+      time: "4:00 AM",
+      points: 250
+    }]);
   }, []);
-  return (
-    <View style={styles.container}>
+  return <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <View style={styles.flexRow}>
             <Text style={styles.heading}>{reward.name}</Text>
             <View style={styles.flexRow}>
-              <Image
-                source={require("./assets/ratingImage.png")}
-                style={styles.ratingImage}
-              />
+              <Image source={require("./assets/ratingImage.png")} style={styles.ratingImage} />
               <Text>{reward.rating}</Text>
             </View>
           </View>
-          <ImageBackground
-            style={styles.rewardImage}
-            source={require("./assets/image.png")}>
+          <ImageBackground style={styles.rewardImage} source={require("./assets/image.png")}>
             <Text style={styles.title}>My Points</Text>
             <Text style={styles.pointsText}>
               {reward.points && reward.points.toFixed(3)}
             </Text>
-            <Button
-              buttonText="Redeem Gift"
-              style={styles.button}
-              color="#12D790"
-            />
-            <Image
-              source={require("./assets/medalIcon.png")}
-              style={styles.medalIcon}
-            />
+            <Button buttonText="Redeem Gift" style={styles.button} color="#12D790" />
+            <Image source={require("./assets/medalIcon.png")} style={styles.medalIcon} />
           </ImageBackground>
           <Text style={styles.heading}>Description</Text>
           <Text style={styles.description}>{reward.description}</Text>
@@ -93,14 +65,10 @@ const RewardsHistory = () => {
             <Text style={styles.heading}>History Reward</Text>
             <View style={styles.flexRow}>
               <Text style={styles.green}>Newest</Text>
-              <Image
-                source={require("./assets/dropdownIcon.png")}
-                style={styles.dropdownIcon}
-              />
+              <Image source={require("./assets/dropdownIcon.png")} style={styles.dropdownIcon} />
             </View>
           </View>
-          {rewardsHistory.map((item, index) => (
-            <View style={styles.rewardContainer} key={index}>
+          {rewardsHistory.map((item, index) => <View style={styles.rewardContainer} key={index}>
               <View style={styles.rewardDetails}>
                 <Text style={styles.rewardTitle}>{item.title}</Text>
                 <Text style={styles.subText}>
@@ -111,13 +79,12 @@ const RewardsHistory = () => {
                 <Text style={styles.points}>+{item.points}</Text>
                 <Text style={styles.subText}>Pts</Text>
               </View>
-            </View>
-          ))}
+            </View>)}
         </View>
       </ScrollView>
-    </View>
-  );
+    </View>;
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -239,7 +206,6 @@ const styles = StyleSheet.create({
     color: "#12D790"
   }
 });
-
 export default RewardsHistory;
 
 const Button = params => {
@@ -253,20 +219,16 @@ const Button = params => {
   const btnText = {
     color: textColor
   };
-  return (
-    <View style={[buttonStyles.btnContainer, params.style]}>
+  return <View style={[buttonStyles.btnContainer, params.style]}>
       <View style={!params.hideShadow ? buttonStyles.shadowContainer : null}>
-        <Pressable
-          style={[buttonStyles.btn, btnStyle]}
-          onPress={params.onPress}>
+        <Pressable style={[buttonStyles.btn, btnStyle]} onPress={params.onPress}>
           <Text style={[buttonStyles.btnText, btnText]}>
             {params.buttonText}
           </Text>
           <View style={styles.childrenContainer}>{params.children}</View>
         </Pressable>
       </View>
-    </View>
-  );
+    </View>;
 };
 
 const buttonStyles = StyleSheet.create({

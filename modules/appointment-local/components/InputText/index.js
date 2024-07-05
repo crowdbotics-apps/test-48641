@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { View, Text, TextInput } from "react-native";
 import { OptionsContext } from "@options";
-
 /**
  * Custom Text Input component
  * @param  {String} placeholder Placeholder for the text input
@@ -12,9 +11,12 @@ import { OptionsContext } from "@options";
  * @param  {String} errorText The error message to be displayed below the input.
  * @return {React.ReactNode}
  */
-const Input = (props) => {
+
+const Input = props => {
   const options = useContext(OptionsContext);
-  const { styles } = options;
+  const {
+    styles
+  } = options;
   const {
     placeholder,
     value,
@@ -23,22 +25,10 @@ const Input = (props) => {
     editable,
     errorText
   } = props;
-
-  return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.input}
-        placeholder={placeholder}
-        value={value}
-        onChangeText={val => setValue(val)}
-        placeholderTextColor='#ddd'
-        multiline={multiline}
-        numberOfLines={multiline ? 10 : null}
-        editable={editable !== false}
-      />
+  return <View style={styles.inputContainer}>
+      <TextInput style={styles.input} placeholder={placeholder} value={value} onChangeText={val => setValue(val)} placeholderTextColor='#ddd' multiline={multiline} numberOfLines={multiline ? 10 : null} editable={editable !== false} />
       {errorText && <Text style={styles.error}>{errorText}</Text>}
-    </View>
-  );
+    </View>;
 };
 
 export default Input;
