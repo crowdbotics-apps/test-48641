@@ -1,93 +1,53 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Pressable,
-  ImageBackground,
-  Image,
-  FlatList
-} from "react-native";
+import { Text, View, StyleSheet, Pressable, ImageBackground, Image, FlatList } from "react-native";
 
 const FoodCategory = () => {
   const [selectedTab1, setSelectedTab1] = useState(0);
   const [selectedTab2, setSelectedTab2] = useState(0);
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    setCategories([
-      {
-        id: 1,
-        name: "Burger",
-        image: require("./assets/itemImage.png")
-      },
-      {
-        id: 2,
-        name: "Pizza",
-        image: require("./assets/itemImage2.png")
-      },
-      {
-        id: 3,
-        name: "Chinese",
-        image: require("./assets/itemImage.png")
-      }
-    ]);
+    setCategories([{
+      id: 1,
+      name: "Burger",
+      image: require("./assets/itemImage.png")
+    }, {
+      id: 2,
+      name: "Pizza",
+      image: require("./assets/itemImage2.png")
+    }, {
+      id: 3,
+      name: "Chinese",
+      image: require("./assets/itemImage.png")
+    }]);
   }, []);
-  return (
-    <View style={styles.container}>
+  return <View style={styles.container}>
       <View style={styles.body}>
-        <TabView
-          tabTitles={["Delivery", "Pickup"]}
-          selected={selectedTab1}
-          onPress={x => {
-            setSelectedTab1(x);
-          }}
-          style={styles.header}
-        />
-        <ImageBackground
-          style={styles.bannerImage}
-          source={require("./assets/bannerImage.png")}>
+        <TabView tabTitles={["Delivery", "Pickup"]} selected={selectedTab1} onPress={x => {
+        setSelectedTab1(x);
+      }} style={styles.header} />
+        <ImageBackground style={styles.bannerImage} source={require("./assets/bannerImage.png")}>
           <View style={styles.bannerTitleContainer}>
             <Text style={styles.bannerText}>Discover</Text>
             <Text style={styles.bannerTitle}>Best Dinner of the day</Text>
           </View>
-          <Image
-            style={styles.arrowIcon}
-            source={require("./assets/arrowIcon.png")}
-          />
+          <Image style={styles.arrowIcon} source={require("./assets/arrowIcon.png")} />
         </ImageBackground>
         <Text style={styles.heading}>Filter</Text>
-        <TabView
-          tabTitles={["Nearby", "Above 4.5", "Cheapest"]}
-          icons={[
-            require("./assets/locationIcon.png"),
-            require("./assets/starIcon.png"),
-            require("./assets/tagIcon.png")
-          ]}
-          selected={selectedTab2}
-          onPress={x => {
-            setSelectedTab2(x);
-          }}
-          backgroundColor="#fff"
-          style={styles.tabView}
-        />
+        <TabView tabTitles={["Nearby", "Above 4.5", "Cheapest"]} icons={[require("./assets/locationIcon.png"), require("./assets/starIcon.png"), require("./assets/tagIcon.png")]} selected={selectedTab2} onPress={x => {
+        setSelectedTab2(x);
+      }} backgroundColor="#fff" style={styles.tabView} />
       </View>
       <View style={styles.categoriesContainer}>
         <Text style={styles.categoryTitle}>Category</Text>
-        <FlatList
-          data={categories}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => (
-            <ImageBackground style={styles.categoryImage} source={item.image}>
+        <FlatList data={categories} keyExtractor={item => item.id.toString()} renderItem={({
+        item
+      }) => <ImageBackground style={styles.categoryImage} source={item.image}>
               <Text style={styles.categoryText}>{item.name}</Text>
-            </ImageBackground>
-          )}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-        />
+            </ImageBackground>} horizontal={true} showsHorizontalScrollIndicator={false} />
       </View>
-    </View>
-  );
+    </View>;
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -165,7 +125,6 @@ const styles = StyleSheet.create({
     marginLeft: 20
   }
 });
-
 export default FoodCategory;
 
 const TabView = ({
@@ -184,40 +143,12 @@ const TabView = ({
     backgroundColor: backgroundColor || "#F1F1F1"
   };
   const propStyle = style || {};
-  return (
-    <View
-      style={[tabViewStyles.paletteContainer, backgroundColorStyle, propStyle]}>
-      {tabTitles.map((title, index) => (
-        <Pressable
-          onPress={() => (onPress ? onPress(index) : null)}
-          style={
-            index === selected
-              ? [tabViewStyles.selected, tabColorStyle, tabViewStyles.tabItem]
-              : [
-                  tabViewStyles.unSelected,
-                  backgroundColorStyle,
-                  tabViewStyles.tabItem
-                ]
-          }
-          key={index}>
-          {icons
-            ? (
-            <Image
-              source={icons[index]}
-              style={[
-                tabViewStyles.icon,
-                index === selected
-                  ? tabViewStyles.selectedIcon
-                  : tabViewStyles.unSelectedIcon
-              ]}
-            />
-              )
-            : null}
+  return <View style={[tabViewStyles.paletteContainer, backgroundColorStyle, propStyle]}>
+      {tabTitles.map((title, index) => <Pressable onPress={() => onPress ? onPress(index) : null} style={index === selected ? [tabViewStyles.selected, tabColorStyle, tabViewStyles.tabItem] : [tabViewStyles.unSelected, backgroundColorStyle, tabViewStyles.tabItem]} key={index}>
+          {icons ? <Image source={icons[index]} style={[tabViewStyles.icon, index === selected ? tabViewStyles.selectedIcon : tabViewStyles.unSelectedIcon]} /> : null}
           <Text>{title}</Text>
-        </Pressable>
-      ))}
-    </View>
-  );
+        </Pressable>)}
+    </View>;
 };
 
 const tabViewStyles = StyleSheet.create({

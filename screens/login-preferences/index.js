@@ -1,30 +1,20 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Switch,
-  Pressable,
-  FlatList,
-  Image
-} from "react-native";
+import { Text, View, StyleSheet, Switch, Pressable, FlatList, Image } from "react-native";
 
 const LoginPreferences = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [settings, setSettings] = useState([]);
   const [selectedSettings, setSelectedSettings] = useState([]);
   useEffect(() => {
-    setSettings([
-      {
-        title: "System Notifications",
-        list: ["Standard", "Biometric"]
-      },
-      {
-        title: "Choose Biometric",
-        list: ["Fingerprint", "Face recognition", "Fingerprint + Face"]
-      }
-    ]);
+    setSettings([{
+      title: "System Notifications",
+      list: ["Standard", "Biometric"]
+    }, {
+      title: "Choose Biometric",
+      list: ["Fingerprint", "Face recognition", "Fingerprint + Face"]
+    }]);
   }, []);
+
   const handleSelect = name => {
     if (selectedSettings.includes(name)) {
       setSelectedSettings(selectedSettings.filter(x => x !== name));
@@ -32,43 +22,20 @@ const LoginPreferences = () => {
       setSelectedSettings([...selectedSettings, name]);
     }
   };
-  return (
-    <View style={styles.container}>
-      <TabView
-        tabTitles={["Login Type", "General"]}
-        selected={selectedTab}
-        onPress={setSelectedTab}
-        style={styles.tabView}
-        backgroundColor="#CCC"
-      />
-      <FlatList
-        data={settings}
-        renderItem={({ item }) => (
-          <View style={styles.settingsTabContainer}>
+
+  return <View style={styles.container}>
+      <TabView tabTitles={["Login Type", "General"]} selected={selectedTab} onPress={setSelectedTab} style={styles.tabView} backgroundColor="#CCC" />
+      <FlatList data={settings} renderItem={({
+      item
+    }) => <View style={styles.settingsTabContainer}>
             <Text style={styles.title}>{item.title}</Text>
-            {item.list &&
-              item.list.map((x, index) => (
-                <View key={index} style={styles.settingsItemContainer}>
-                  <View
-                    style={[
-                      styles.settingsItem,
-                      index === item.list.length - 1
-                        ? null
-                        : styles.borderBottom
-                    ]}>
+            {item.list && item.list.map((x, index) => <View key={index} style={styles.settingsItemContainer}>
+                  <View style={[styles.settingsItem, index === item.list.length - 1 ? null : styles.borderBottom]}>
                     <Text>{x}</Text>
-                    <Switch
-                      value={selectedSettings.includes(x)}
-                      onValueChange={() => handleSelect(x)}
-                    />
+                    <Switch value={selectedSettings.includes(x)} onValueChange={() => handleSelect(x)} />
                   </View>
-                </View>
-              ))}
-          </View>
-        )}
-        keyExtractor={item => item.title}
-        ListFooterComponent={() => (
-          <View>
+                </View>)}
+          </View>} keyExtractor={item => item.title} ListFooterComponent={() => <View>
             <Text style={styles.title}>Enter Password</Text>
             <View style={styles.settingsItemContainer}>
               <View style={styles.settingsItem}>
@@ -77,26 +44,18 @@ const LoginPreferences = () => {
             </View>
             <View style={styles.footer}>
               <View style={styles.footerItem}>
-                <Image
-                  source={require("./assets/fingerprintIcon.png")}
-                  style={styles.footerIcon}
-                />
+                <Image source={require("./assets/fingerprintIcon.png")} style={styles.footerIcon} />
                 <Text style={styles.footerText}>Set Up Fingerprint</Text>
               </View>
               <View style={styles.footerItem}>
-                <Image
-                  source={require("./assets/faceIDIcon.png")}
-                  style={styles.footerIcon}
-                />
+                <Image source={require("./assets/faceIDIcon.png")} style={styles.footerIcon} />
                 <Text style={styles.footerText}>Set Up Fingerprint</Text>
               </View>
             </View>
-          </View>
-        )}
-      />
-    </View>
-  );
+          </View>} />
+    </View>;
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -161,7 +120,6 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
 export default LoginPreferences;
 
 const TabView = ({
@@ -180,40 +138,12 @@ const TabView = ({
     backgroundColor: backgroundColor || "#F1F1F1"
   };
   const propStyle = style || {};
-  return (
-    <View
-      style={[tabViewStyles.paletteContainer, backgroundColorStyle, propStyle]}>
-      {tabTitles.map((title, index) => (
-        <Pressable
-          onPress={() => (onPress ? onPress(index) : null)}
-          style={
-            index === selected
-              ? [tabViewStyles.selected, tabColorStyle, tabViewStyles.tabItem]
-              : [
-                  tabViewStyles.unSelected,
-                  backgroundColorStyle,
-                  tabViewStyles.tabItem
-                ]
-          }
-          key={index}>
-          {icons
-            ? (
-            <Image
-              source={icons[index]}
-              style={[
-                tabViewStyles.icon,
-                index === selected
-                  ? tabViewStyles.selectedIcon
-                  : tabViewStyles.unSelectedIcon
-              ]}
-            />
-              )
-            : null}
+  return <View style={[tabViewStyles.paletteContainer, backgroundColorStyle, propStyle]}>
+      {tabTitles.map((title, index) => <Pressable onPress={() => onPress ? onPress(index) : null} style={index === selected ? [tabViewStyles.selected, tabColorStyle, tabViewStyles.tabItem] : [tabViewStyles.unSelected, backgroundColorStyle, tabViewStyles.tabItem]} key={index}>
+          {icons ? <Image source={icons[index]} style={[tabViewStyles.icon, index === selected ? tabViewStyles.selectedIcon : tabViewStyles.unSelectedIcon]} /> : null}
           <Text>{title}</Text>
-        </Pressable>
-      ))}
-    </View>
-  );
+        </Pressable>)}
+    </View>;
 };
 
 const tabViewStyles = StyleSheet.create({

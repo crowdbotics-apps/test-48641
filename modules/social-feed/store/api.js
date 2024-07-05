@@ -1,10 +1,8 @@
 import axios from "axios";
 import localOptions from "../options";
-
 const BASE_URL = localOptions.BASE_URL;
 const ACCESS_TOKEN = localOptions.USER_TOKEN;
-
-export const createPost = (payload) => {
+export const createPost = payload => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -17,7 +15,6 @@ export const createPost = (payload) => {
   };
   return axios.request(config);
 };
-
 export const getFollowers = () => {
   const config = {
     method: "get",
@@ -29,7 +26,6 @@ export const getFollowers = () => {
   };
   return axios.request(config);
 };
-
 export const getFollowing = () => {
   const config = {
     method: "get",
@@ -41,8 +37,7 @@ export const getFollowing = () => {
   };
   return axios.request(config);
 };
-
-export const followUser = (id) => {
+export const followUser = id => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -53,8 +48,7 @@ export const followUser = (id) => {
   };
   return axios.request(config);
 };
-
-export const unFollowUser = (id) => {
+export const unFollowUser = id => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -65,8 +59,7 @@ export const unFollowUser = (id) => {
   };
   return axios.request(config);
 };
-
-export const getPostDetails = (id) => {
+export const getPostDetails = id => {
   const config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -77,7 +70,6 @@ export const getPostDetails = (id) => {
   };
   return axios.request(config);
 };
-
 export const getMyFeed = () => {
   const config = {
     method: "get",
@@ -89,8 +81,7 @@ export const getMyFeed = () => {
   };
   return axios.request(config);
 };
-
-export const likePost = (id) => {
+export const likePost = id => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -104,8 +95,7 @@ export const likePost = (id) => {
   };
   return axios.request(config);
 };
-
-export const unLikePost = (id) => {
+export const unLikePost = id => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -119,8 +109,7 @@ export const unLikePost = (id) => {
   };
   return axios.request(config);
 };
-
-export const getUserProfile = (id) => {
+export const getUserProfile = id => {
   const config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -131,8 +120,7 @@ export const getUserProfile = (id) => {
   };
   return axios.request(config);
 };
-
-export const likeComment = (id) => {
+export const likeComment = id => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -146,8 +134,7 @@ export const likeComment = (id) => {
   };
   return axios.request(config);
 };
-
-export const unLikeComment = (id) => {
+export const unLikeComment = id => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -161,8 +148,7 @@ export const unLikeComment = (id) => {
   };
   return axios.request(config);
 };
-
-export const addComment = (payload) => {
+export const addComment = payload => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -178,7 +164,6 @@ export const addComment = (payload) => {
   };
   return axios.request(config);
 };
-
 export const api = {
   createPost,
   getFollowers,

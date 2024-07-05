@@ -1,9 +1,7 @@
 import axios from "axios";
 import { getGlobalOptions } from "@options";
-
 const global = getGlobalOptions();
 const BASE_URL = global.url;
-
 export const createAppointment = (data, token) => {
   const config = {
     method: "post",
@@ -16,8 +14,7 @@ export const createAppointment = (data, token) => {
   };
   return axios.request(config);
 };
-
-export const getAppointment = (token) => {
+export const getAppointment = token => {
   const config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -28,7 +25,6 @@ export const getAppointment = (token) => {
   };
   return axios.request(config);
 };
-
 export const deleteAppointment = (id, token) => {
   const config = {
     method: "delete",
@@ -40,8 +36,7 @@ export const deleteAppointment = (id, token) => {
   };
   return axios.request(config);
 };
-
-export const getAppointmentSessions = (token) => {
+export const getAppointmentSessions = token => {
   const config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -52,8 +47,7 @@ export const getAppointmentSessions = (token) => {
   };
   return axios.request(config);
 };
-
-export const getAppointmentTypes = (token) => {
+export const getAppointmentTypes = token => {
   const config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -64,8 +58,7 @@ export const getAppointmentTypes = (token) => {
   };
   return axios.request(config);
 };
-
-export const getServiceProviders = (token) => {
+export const getServiceProviders = token => {
   const config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -76,7 +69,6 @@ export const getServiceProviders = (token) => {
   };
   return axios.request(config);
 };
-
 export const api = {
   createAppointment,
   getAppointment,

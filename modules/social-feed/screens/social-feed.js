@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 import { View, Image, Text, FlatList } from "react-native";
 import { OptionsContext } from "@options";
@@ -6,17 +7,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMyFeed, likePost, unLikePost } from "../store";
 import { useIsFocused } from "@react-navigation/native";
 
-const SocialFeedScreen = (props) => {
+const SocialFeedScreen = props => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
-  const { navigation } = props;
+  const {
+    navigation
+  } = props;
   const [callbackVariable, setCallbackVariable] = useState(false);
-  const { styles } = useContext(OptionsContext);
+  const {
+    styles
+  } = useContext(OptionsContext); // Get feed from store.
 
-  // Get feed from store.
-  const { entities } = useSelector((state) => state.Social.getMyFeed);
+  const {
+    entities
+  } = useSelector(state => state.Social.getMyFeed); // Fetch feed data from backend
 
-  // Fetch feed data from backend
   const fetchFeed = () => {
     dispatch(getMyFeed());
   };
@@ -27,55 +32,35 @@ const SocialFeedScreen = (props) => {
     }
   }, [callbackVariable, isFocused]);
 
-  const renderItem = ({ item }) => (
-    <PostComponent
-      post={item}
-      navigationObject={navigation}
-      setCallbackVariable={setCallbackVariable}
-    />
-  );
+  const renderItem = ({
+    item
+  }) => <PostComponent post={item} navigationObject={navigation} setCallbackVariable={setCallbackVariable} />;
 
-  return (
-    <View style={{ marginTop: 60 }}>
+  return <View style={_styles.jiuaCHKm}>
       <View style={styles.feedContainer}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          {/* search bar */}
+        <View style={_styles.LUgeDajS}>
+          {
+          /* search bar */
+        }
           <View style={styles.feedSearchBar}>
             <TextInput style={styles.feedSearchInput} placeholder="Search" />
-            <Image
-              source={require("../assets/search.png")}
-              style={styles.searchIcon}
-            />
+            <Image source={require("../assets/search.png")} style={styles.searchIcon} />
           </View>
-          {/* end search bar */}
-          <TouchableOpacity
-            style={styles.createPostHeader}
-            onPress={() => {
-              navigation.navigate("Create Post");
-            }}
-          >
-            <Image
-              source={require("../assets/plus.png")}
-              style={styles.headerImage}
-            />
+          {
+          /* end search bar */
+        }
+          <TouchableOpacity style={styles.createPostHeader} onPress={() => {
+          navigation.navigate("Create Post");
+        }}>
+            <Image source={require("../assets/plus.png")} style={styles.headerImage} />
           </TouchableOpacity>
         </View>
-        <FlatList
-          data={entities}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          onRefresh={fetchFeed}
-          refreshing={false}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-        />
+        <FlatList data={entities} renderItem={renderItem} keyExtractor={item => item.id} onRefresh={fetchFeed} refreshing={false} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false} />
       </View>
-    </View>
-  );
+    </View>;
 };
 
 export default SocialFeedScreen;
-
 /**
  * PostComponent displays a single post and handles post-related actions.
  * @param {Object} props - The component's properties.
@@ -83,10 +68,24 @@ export default SocialFeedScreen;
  * @param {Object} props.navigationObject - React Navigation navigation object.
  * @param {Function} props.setCallbackVariable - Function to set callbackVariable state.
  */
-const PostComponent = ({ post, navigationObject, setCallbackVariable }) => {
-  const { styles } = useContext(OptionsContext);
+
+const PostComponent = ({
+  post,
+  navigationObject,
+  setCallbackVariable
+}) => {
+  const {
+    styles
+  } = useContext(OptionsContext);
   const dispatch = useDispatch();
-  const { id, caption, upvotes, media, user, liked } = post;
+  const {
+    id,
+    caption,
+    upvotes,
+    media,
+    user,
+    liked
+  } = post;
 
   const likeCurrentPost = () => {
     setCallbackVariable(true);
@@ -101,75 +100,60 @@ const PostComponent = ({ post, navigationObject, setCallbackVariable }) => {
       setCallbackVariable(false);
     });
   };
-  return (
-    <TouchableOpacity
-      style={{ margin: 10 }}
-      onPress={() => {
-        navigationObject.navigate("PostDetailsScreen", { id: id });
-      }}
-    >
-      <TouchableOpacity
-        style={styles.usernameContainer}
-        onPress={() => {
-          navigationObject.navigate("SocialProfileScreen", { id: user?.id });
-        }}
-      >
+
+  return <TouchableOpacity style={_styles.MJQSQFbk} onPress={() => {
+    navigationObject.navigate("PostDetailsScreen", {
+      id: id
+    });
+  }}>
+      <TouchableOpacity style={styles.usernameContainer} onPress={() => {
+      navigationObject.navigate("SocialProfileScreen", {
+        id: user?.id
+      });
+    }}>
         <View style={styles.userImageContainer}>
-          <Image
-            source={
-              user?.image ? { uri: user.image } : require("../assets/user.png")
-            }
-            style={styles.userImage}
-          />
+          <Image source={user?.image ? {
+          uri: user.image
+        } : require("../assets/user.png")} style={styles.userImage} />
         </View>
         <Text style={styles.userText}>{user?.name}</Text>
       </TouchableOpacity>
-      <View
-        style={[
-          styles.userPostImage,
-          {
-            backgroundColor: media?.[0]?.background
-              ? "rgb" + media?.[0]?.background
-              : "#acacac"
-          }
-        ]}
-      >
-        <Image
-          source={{ uri: media?.[0]?.image }}
-          style={styles.postImage}
-          resizeMode="contain"
-        />
+      <View style={[styles.userPostImage, {
+      backgroundColor: media?.[0]?.background ? "rgb" + media?.[0]?.background : "#acacac"
+    }]}>
+        <Image source={{
+        uri: media?.[0]?.image
+      }} style={styles.postImage} resizeMode="contain" />
       </View>
       <View style={styles.postcontainer}>
         <View style={styles.leftContainer}>
-          <TouchableOpacity
-            style={{ flexDirection: "row" }}
-            onPress={() => {
-              liked ? unLikeCurrentPost(id) : likeCurrentPost(id);
-            }}
-          >
-            <Image
-              source={
-                liked
-                  ? require("../assets/unlike.png")
-                  : require("../assets/like.png")
-              }
-              style={styles.imageIcons}
-            />
+          <TouchableOpacity style={_styles.tIlYDHvR} onPress={() => {
+          liked ? unLikeCurrentPost(id) : likeCurrentPost(id);
+        }}>
+            <Image source={liked ? require("../assets/unlike.png") : require("../assets/like.png")} style={styles.imageIcons} />
             <Text style={styles.mh10}>{upvotes}</Text>
           </TouchableOpacity>
-          <Image
-            source={require("../assets/comment.png")}
-            style={styles.imageIcons}
-          />
+          <Image source={require("../assets/comment.png")} style={styles.imageIcons} />
           <Text style={styles.mh10}>{post?.comments_count}</Text>
         </View>
-        <Image
-          source={require("../assets/group.png")}
-          style={[styles.imageIcons, styles.mr10]}
-        />
+        <Image source={require("../assets/group.png")} style={[styles.imageIcons, styles.mr10]} />
       </View>
       <Text style={styles.postText}>{caption}</Text>
-    </TouchableOpacity>
-  );
+    </TouchableOpacity>;
 };
+
+const _styles = StyleSheet.create({
+  jiuaCHKm: {
+    marginTop: 60
+  },
+  LUgeDajS: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  MJQSQFbk: {
+    margin: 10
+  },
+  tIlYDHvR: {
+    flexDirection: "row"
+  }
+});

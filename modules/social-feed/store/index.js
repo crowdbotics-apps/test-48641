@@ -2,47 +2,34 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "./api";
 import { Alert } from "react-native";
 import { mapErrors } from "../utils";
-
-export const createPost = createAsyncThunk(
-  "social/createPost",
-  async (payload) => {
-    try {
-      const response = await api.createPost(payload);
-      return response.data;
-    } catch (error) {
-      Alert.alert("Error", mapErrors(error));
-      throw new Error();
-    }
+export const createPost = createAsyncThunk("social/createPost", async payload => {
+  try {
+    const response = await api.createPost(payload);
+    return response.data;
+  } catch (error) {
+    Alert.alert("Error", mapErrors(error));
+    throw new Error();
   }
-);
-
-export const getFollowers = createAsyncThunk(
-  "social/getFollowers",
-  async () => {
-    try {
-      const response = await api.getFollowers();
-      return response.data;
-    } catch (error) {
-      Alert.alert("Error", mapErrors(error));
-      throw new Error();
-    }
+});
+export const getFollowers = createAsyncThunk("social/getFollowers", async () => {
+  try {
+    const response = await api.getFollowers();
+    return response.data;
+  } catch (error) {
+    Alert.alert("Error", mapErrors(error));
+    throw new Error();
   }
-);
-
-export const getFollowing = createAsyncThunk(
-  "social/getFollowing",
-  async () => {
-    try {
-      const response = await api.getFollowing();
-      return response.data;
-    } catch (error) {
-      Alert.alert("Error", mapErrors(error));
-      throw new Error();
-    }
+});
+export const getFollowing = createAsyncThunk("social/getFollowing", async () => {
+  try {
+    const response = await api.getFollowing();
+    return response.data;
+  } catch (error) {
+    Alert.alert("Error", mapErrors(error));
+    throw new Error();
   }
-);
-
-export const followUser = createAsyncThunk("social/followUser", async (id) => {
+});
+export const followUser = createAsyncThunk("social/followUser", async id => {
   try {
     const response = await api.followUser(id);
     return response.data;
@@ -51,33 +38,24 @@ export const followUser = createAsyncThunk("social/followUser", async (id) => {
     throw new Error();
   }
 });
-
-export const unFollowUser = createAsyncThunk(
-  "social/unFollowUser",
-  async (id) => {
-    try {
-      const response = await api.unFollowUser(id);
-      return response.data;
-    } catch (error) {
-      Alert.alert("Error", mapErrors(error));
-      throw new Error();
-    }
+export const unFollowUser = createAsyncThunk("social/unFollowUser", async id => {
+  try {
+    const response = await api.unFollowUser(id);
+    return response.data;
+  } catch (error) {
+    Alert.alert("Error", mapErrors(error));
+    throw new Error();
   }
-);
-
-export const getPostDetails = createAsyncThunk(
-  "social/getPostDetails",
-  async (id) => {
-    try {
-      const response = await api.getPostDetails(id);
-      return response.data;
-    } catch (error) {
-      Alert.alert("Error", mapErrors(error));
-      throw new Error();
-    }
+});
+export const getPostDetails = createAsyncThunk("social/getPostDetails", async id => {
+  try {
+    const response = await api.getPostDetails(id);
+    return response.data;
+  } catch (error) {
+    Alert.alert("Error", mapErrors(error));
+    throw new Error();
   }
-);
-
+});
 export const getMyFeed = createAsyncThunk("social/getMyFeed", async () => {
   try {
     const response = await api.getMyFeed();
@@ -87,8 +65,7 @@ export const getMyFeed = createAsyncThunk("social/getMyFeed", async () => {
     throw new Error();
   }
 });
-
-export const likePost = createAsyncThunk("social/likePost", async (id) => {
+export const likePost = createAsyncThunk("social/likePost", async id => {
   try {
     const response = await api.likePost(id);
     return response.data;
@@ -97,8 +74,7 @@ export const likePost = createAsyncThunk("social/likePost", async (id) => {
     throw new Error();
   }
 });
-
-export const unLikePost = createAsyncThunk("social/unLikePost", async (id) => {
+export const unLikePost = createAsyncThunk("social/unLikePost", async id => {
   try {
     const response = await api.unLikePost(id);
     return response.data;
@@ -107,59 +83,42 @@ export const unLikePost = createAsyncThunk("social/unLikePost", async (id) => {
     throw new Error();
   }
 });
-
-export const getUserProfile = createAsyncThunk(
-  "social/getUserProfile",
-  async (id) => {
-    try {
-      const response = await api.getUserProfile(id);
-      return response.data;
-    } catch (error) {
-      Alert.alert("Error", mapErrors(error));
-      throw new Error();
-    }
+export const getUserProfile = createAsyncThunk("social/getUserProfile", async id => {
+  try {
+    const response = await api.getUserProfile(id);
+    return response.data;
+  } catch (error) {
+    Alert.alert("Error", mapErrors(error));
+    throw new Error();
   }
-);
-
-export const likeComment = createAsyncThunk(
-  "social/likeComment",
-  async (id) => {
-    try {
-      const response = await api.likeComment(id);
-      return response.data;
-    } catch (error) {
-      Alert.alert("Error", mapErrors(error));
-      throw new Error();
-    }
+});
+export const likeComment = createAsyncThunk("social/likeComment", async id => {
+  try {
+    const response = await api.likeComment(id);
+    return response.data;
+  } catch (error) {
+    Alert.alert("Error", mapErrors(error));
+    throw new Error();
   }
-);
-
-export const unLikeComment = createAsyncThunk(
-  "social/unLikeComment",
-  async (id) => {
-    try {
-      const response = await api.unLikeComment(id);
-      return response.data;
-    } catch (error) {
-      Alert.alert("Error", mapErrors(error));
-      throw new Error();
-    }
+});
+export const unLikeComment = createAsyncThunk("social/unLikeComment", async id => {
+  try {
+    const response = await api.unLikeComment(id);
+    return response.data;
+  } catch (error) {
+    Alert.alert("Error", mapErrors(error));
+    throw new Error();
   }
-);
-
-export const addComment = createAsyncThunk(
-  "social/addComment",
-  async (payload) => {
-    try {
-      const response = await api.addComment(payload);
-      return response.data;
-    } catch (error) {
-      Alert.alert("Error", mapErrors(error));
-      throw new Error();
-    }
+});
+export const addComment = createAsyncThunk("social/addComment", async payload => {
+  try {
+    const response = await api.addComment(payload);
+    return response.data;
+  } catch (error) {
+    Alert.alert("Error", mapErrors(error));
+    throw new Error();
   }
-);
-
+});
 const initialState = {
   createPost: {
     entities: [],
@@ -218,13 +177,12 @@ const initialState = {
     }
   }
 };
-
 export const slice = createSlice({
   name: "social",
   initialState: initialState,
   reducers: {},
   extraReducers: {
-    [createPost.pending]: (state) => {
+    [createPost.pending]: state => {
       if (state.createPost.api.loading === "idle") {
         state.createPost.api.loading = "pending";
         state.createPost.api.error = null;
@@ -242,7 +200,7 @@ export const slice = createSlice({
         state.createPost.api.loading = "idle";
       }
     },
-    [getFollowers.pending]: (state) => {
+    [getFollowers.pending]: state => {
       if (state.getFollowers.api.loading === "idle") {
         state.getFollowers.api.loading = "pending";
         state.getFollowers.api.error = null;
@@ -260,7 +218,7 @@ export const slice = createSlice({
         state.getFollowers.api.loading = "idle";
       }
     },
-    [getFollowing.pending]: (state) => {
+    [getFollowing.pending]: state => {
       if (state.getFollowing.api.loading === "idle") {
         state.getFollowing.api.loading = "pending";
         state.getFollowing.api.error = null;
@@ -278,7 +236,7 @@ export const slice = createSlice({
         state.getFollowing.api.loading = "idle";
       }
     },
-    [followUser.pending]: (state) => {
+    [followUser.pending]: state => {
       if (state.followUser.api.loading === "idle") {
         state.followUser.api.loading = "pending";
         state.followUser.api.error = null;
@@ -296,7 +254,7 @@ export const slice = createSlice({
         state.followUser.api.loading = "idle";
       }
     },
-    [unFollowUser.pending]: (state) => {
+    [unFollowUser.pending]: state => {
       if (state.unFollowUser.api.loading === "idle") {
         state.unFollowUser.api.loading = "pending";
         state.unFollowUser.api.error = null;
@@ -314,7 +272,7 @@ export const slice = createSlice({
         state.unFollowUser.api.loading = "idle";
       }
     },
-    [getPostDetails.pending]: (state) => {
+    [getPostDetails.pending]: state => {
       if (state.getPostDetails.api.loading === "idle") {
         state.getPostDetails.api.loading = "pending";
         state.getPostDetails.api.error = null;
@@ -332,7 +290,7 @@ export const slice = createSlice({
         state.getPostDetails.api.loading = "idle";
       }
     },
-    [getMyFeed.pending]: (state) => {
+    [getMyFeed.pending]: state => {
       if (state.getMyFeed.api.loading === "idle") {
         state.getMyFeed.api.loading = "pending";
         state.getMyFeed.api.error = null;
@@ -350,9 +308,9 @@ export const slice = createSlice({
         state.getMyFeed.api.loading = "idle";
       }
     },
-
-    [getUserProfile.pending]: (state) => {
+    [getUserProfile.pending]: state => {
       state.getUserProfile.entities = [];
+
       if (state.getUserProfile.api.loading === "idle") {
         state.getUserProfile.api.loading = "pending";
         state.getUserProfile.api.error = null;

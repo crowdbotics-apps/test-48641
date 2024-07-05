@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import React, { useContext } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { OptionsContext } from "@options";
@@ -5,7 +6,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Comment } from "./comment";
 import { useDispatch } from "react-redux";
 import { likePost, unLikePost } from "../store";
-
 /**
  * PostComponent displays a single post and handles post-related actions.
  * @param {Object} props - The component's properties.
@@ -16,6 +16,7 @@ import { likePost, unLikePost } from "../store";
  * @param {Array} props.baseOptions - Base options for the ActionSheet.
  * @param {Function} props.setPostOptions - Function to set post-related options.
  */
+
 export const PostComponent = ({
   postDetails,
   setCallbackVariable,
@@ -25,9 +26,18 @@ export const PostComponent = ({
   setPostOptions
 }) => {
   const dispatch = useDispatch();
-  const { styles } = useContext(OptionsContext);
-  const { media, description, upvotes, comments, user, id, liked } =
-    postDetails;
+  const {
+    styles
+  } = useContext(OptionsContext);
+  const {
+    media,
+    description,
+    upvotes,
+    comments,
+    user,
+    id,
+    liked
+  } = postDetails;
 
   const likeCurrentPost = () => {
     setCallbackVariable(true);
@@ -39,98 +49,80 @@ export const PostComponent = ({
     dispatch(unLikePost(id)).then(() => setCallbackVariable(false));
   };
 
-  return (
-    <KeyboardAwareScrollView style={{ margin: 10 }}>
+  return <KeyboardAwareScrollView style={_styles.RKKDEnwr}>
       <View style={styles.postDetailsContainer}>
-        <TouchableOpacity
-          style={styles.usernameContainer}
-          onPress={() => {
-            navigation.navigate("SocialProfileScreen", { id: user?.id });
-          }}
-        >
+        <TouchableOpacity style={styles.usernameContainer} onPress={() => {
+        navigation.navigate("SocialProfileScreen", {
+          id: user?.id
+        });
+      }}>
           <View style={styles.postUserImageContainer}>
-            <Image
-              source={
-                user?.photo
-                  ? { uri: user.photo }
-                  : require("../assets/user.png")
-              }
-              style={styles.userImageStyles}
-            />
+            <Image source={user?.photo ? {
+            uri: user.photo
+          } : require("../assets/user.png")} style={styles.userImageStyles} />
           </View>
           <Text style={styles.userNameText}>{user?.name || ""}</Text>
         </TouchableOpacity>
-        <View style={{ justifyContent: "space-evenly" }}>
-          <TouchableOpacity
-            onPress={() => {
-              // Add "Delete Post" option for the owner of the post
-              postDetails?.is_owner &&
-                setPostOptions([...baseOptions, "Delete Post"]);
-              // Show the ActionSheet after a brief delay
-              setTimeout(() => {
-                actionSheet.current.show();
-              }, 100);
-            }}
-          >
-            <Image
-              source={require("../assets/dots.png")}
-              style={{ marginTop: -20 }}
-            />
+        <View style={_styles.woilepvG}>
+          <TouchableOpacity onPress={() => {
+          // Add "Delete Post" option for the owner of the post
+          postDetails?.is_owner && setPostOptions([...baseOptions, "Delete Post"]); // Show the ActionSheet after a brief delay
+
+          setTimeout(() => {
+            actionSheet.current.show();
+          }, 100);
+        }}>
+            <Image source={require("../assets/dots.png")} style={_styles.nWXhqKfr} />
           </TouchableOpacity>
         </View>
       </View>
-      {/* Post image */}
-      <View
-        style={[
-          styles.userPostImage,
-          {
-            backgroundColor: media?.[0]?.background
-              ? media?.[0]?.background
-              : "#c3aaac"
-          }
-        ]}
-      >
-        <Image source={{ uri: media?.[0]?.image }} style={styles.postImage} resizeMode="contain"/>
+      {
+      /* Post image */
+    }
+      <View style={[styles.userPostImage, {
+      backgroundColor: media?.[0]?.background ? media?.[0]?.background : "#c3aaac"
+    }]}>
+        <Image source={{
+        uri: media?.[0]?.image
+      }} style={styles.postImage} resizeMode="contain" />
       </View>
-      {/* Post description */}
+      {
+      /* Post description */
+    }
       <Text style={styles.postText}>{description}</Text>
       <View style={styles.postcontainer}>
         <View style={styles.leftContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              liked ? unLikeCurrentPost() : likeCurrentPost();
-            }}
-            style={{ flexDirection: "row" }}
-          >
-            <Image
-              source={
-                liked
-                  ? require("../assets/unlike.png")
-                  : require("../assets/like.png")
-              }
-              style={styles.imageIcons}
-            />
+          <TouchableOpacity onPress={() => {
+          liked ? unLikeCurrentPost() : likeCurrentPost();
+        }} style={_styles.HqJijdzV}>
+            <Image source={liked ? require("../assets/unlike.png") : require("../assets/like.png")} style={styles.imageIcons} />
             <Text style={styles.mh10}>{upvotes}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ flexDirection: "row" }}>
-            <Image
-              source={require("../assets/comment.png")}
-              style={styles.imageIcons}
-            />
+          <TouchableOpacity style={_styles.qQXnlpty}>
+            <Image source={require("../assets/comment.png")} style={styles.imageIcons} />
             <Text style={styles.mh10}>{postDetails?.comments_count}</Text>
           </TouchableOpacity>
         </View>
-        <Image
-          source={require("../assets/group.png")}
-          style={[styles.imageIcons, styles.mr10]}
-        />
+        <Image source={require("../assets/group.png")} style={[styles.imageIcons, styles.mr10]} />
       </View>
-      <Comment
-        comments={comments || []}
-        setCallbackVariable={setCallbackVariable}
-        postId={id}
-        navigation={navigation}
-      />
-    </KeyboardAwareScrollView>
-  );
+      <Comment comments={comments || []} setCallbackVariable={setCallbackVariable} postId={id} navigation={navigation} />
+    </KeyboardAwareScrollView>;
 };
+
+const _styles = StyleSheet.create({
+  RKKDEnwr: {
+    margin: 10
+  },
+  woilepvG: {
+    justifyContent: "space-evenly"
+  },
+  nWXhqKfr: {
+    marginTop: -20
+  },
+  HqJijdzV: {
+    flexDirection: "row"
+  },
+  qQXnlpty: {
+    flexDirection: "row"
+  }
+});

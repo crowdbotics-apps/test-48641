@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-
 const styles = StyleSheet.create({
   tab: {
     backgroundColor: "#F1F1F1",
@@ -71,7 +70,6 @@ const styles = StyleSheet.create({
   createAppointmentButton: {
     padding: 15
   },
-
   items: {
     borderWidth: 1,
     borderRadius: 10,
@@ -314,13 +312,11 @@ const styles = StyleSheet.create({
     width: 100,
     alignSelf: "flex-end"
   }
-});
+}); // API Authentication token
 
-// API Authentication token
-const ACCESS_TOKEN = "";
-// Backend user identifier
+const ACCESS_TOKEN = ""; // Backend user identifier
+
 const USER_ID = 1;
-
 export default {
   styles: styles,
   ACCESS_TOKEN: ACCESS_TOKEN,

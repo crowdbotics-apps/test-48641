@@ -2,8 +2,7 @@ import React from "react";
 import { Text, Image, StyleSheet, View, TouchableHighlight, ScrollView } from "react-native";
 
 const ShoppingCartScreen = () => {
-  return (
-    <ScrollView>
+  return <ScrollView>
       <View style={styles.container}>
         <View style={styles.headerCard}>
           <View style={styles.cardContent}>
@@ -40,8 +39,7 @@ const ShoppingCartScreen = () => {
           </Button>
         </View>
       </View>
-    </ScrollView>
-  );
+    </ScrollView>;
 };
 
 const styles = StyleSheet.create({
@@ -114,14 +112,15 @@ const styles = StyleSheet.create({
   btnContainer: {
     marginVertical: 20,
     paddingHorizontal: "10%"
+  },
+  drZVPaSG: {
+    fontWeight: "bold"
   }
 });
-
 export default ShoppingCartScreen;
 
 const OrderCard = () => {
-  return (
-    <View style={orderStyles.container}>
+  return <View style={orderStyles.container}>
       <View style={orderStyles.order}>
         <View style={orderStyles.image}>
           <Image source={require("./assets/edit.png")} />
@@ -131,7 +130,7 @@ const OrderCard = () => {
           <View style={orderStyles.bottomComponent}>
             <View style={orderStyles.quantity}>
               <Text>-</Text>
-              <Text style={{ fontWeight: "bold" }}>3</Text>
+              <Text style={styles.drZVPaSG}>3</Text>
               <Text>+</Text>
             </View>
             <Image source={require("./assets/delete.png")} style={orderStyles.img} />
@@ -141,8 +140,7 @@ const OrderCard = () => {
       <View>
         <Text style={orderStyles.orderPrice}>$10.25</Text>
       </View>
-    </View>
-  );
+    </View>;
 };
 
 const orderStyles = StyleSheet.create({
@@ -174,7 +172,6 @@ const orderStyles = StyleSheet.create({
   description: {
     flexDirection: "column",
     justifyContent: "space-between"
-
   },
   quantity: {
     width: 80,
@@ -186,7 +183,6 @@ const orderStyles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 10,
     marginTop: 12
-
   },
   bottomComponent: {
     flexDirection: "row",
@@ -203,19 +199,19 @@ const orderStyles = StyleSheet.create({
   }
 });
 
-const Button = (props) => {
-  return (
-    <TouchableHighlight onPress={props.onPress} underlayColor='#DDDDDD'>
+const Button = props => {
+  return <TouchableHighlight onPress={props.onPress} underlayColor='#DDDDDD'>
       <View style={[btnStyles.button, {
-        backgroundColor: props.backgroundColor ? props.backgroundColor : "#000000",
-        height: props.height ? props.height : 49,
-        borderWidth: props.borderWidth ? props.borderWidth : 0,
-        borderColor: props.borderColor ? props.borderColor : "#000000"
-      }]}>
-        <Text style={[btnStyles.text, { color: props.color ? props.color : "#ffffff" }]}>{props.children}</Text>
+      backgroundColor: props.backgroundColor ? props.backgroundColor : "#000000",
+      height: props.height ? props.height : 49,
+      borderWidth: props.borderWidth ? props.borderWidth : 0,
+      borderColor: props.borderColor ? props.borderColor : "#000000"
+    }]}>
+        <Text style={[btnStyles.text, {
+        color: props.color ? props.color : "#ffffff"
+      }]}>{props.children}</Text>
       </View>
-    </TouchableHighlight>
-  );
+    </TouchableHighlight>;
 };
 
 const btnStyles = StyleSheet.create({
