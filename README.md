@@ -72,6 +72,7 @@ This section will show any installed modules you add from the Storyboard Modules
 - [django-openai](backend/modules)
 - [django-ocr](backend/modules)
 - [social-feed]()
+- [react-native-qr-code](modules/qr-code)
 
 # Getting started: Frontend
 
